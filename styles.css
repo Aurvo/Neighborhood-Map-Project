@@ -1,0 +1,219 @@
+/* Makes the page fill the window. */
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	display: -webkit-flex;
+	display: flex;
+}
+
+/* Sets map height explicitly to define the size of the div
+* element that contains the map. */
+#map {
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+#marker-list-view {
+	height: 100%;
+	padding: 10px 10px 0 10px;
+	color: white;
+	background-color: #222;
+	overflow: auto;
+}
+
+#marker-list-search-box {
+	font-size: 23px;
+	width: 300px;
+}
+
+#no-markers-p {
+	text-align: center;
+	font-size: 18px;
+	padding: 10px;
+}
+
+.lvMarkerBtn {
+	font-size: 20px;
+	padding: 7px;
+}
+
+.lvMarkerBtn:hover{
+	cursor: pointer;
+	background-color: #555;
+}
+
+.lvDeadMarkerBtn {
+	font-size: 20px;
+	padding: 7px;
+	color: #a66;
+}
+
+.lvShowHideButton {
+	display: inline-block;
+	background-color: purple;
+	border: 1px solid white;
+	margin: 0px 3px 3px 0px;
+	width: 120px;
+	text-align: center;
+	padding: 5px;
+	font-size: 23px;
+	cursor: pointer;
+}
+
+.centerAlign {
+	text-align: center;
+}
+
+.mapControl {
+	background: white;
+	border: 2px solid white;
+	padding: 20px;
+	border-radius: 3px;
+	box-shadow: 0px 2px 6px rgba(0,0,0,.3);
+	text-align: center;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.marginTop {
+	margin-top: 18px;
+}
+
+.contextMenu {
+	position: fixed;
+	width: 150px;
+	background: white;
+	cursor: pointer;
+	border: .1px solid grey;
+}
+
+.contextMenuBtn {
+	background: white;
+	color: black;
+	border: .1px solid grey;
+	text-align: center;
+	padding: 3px 0px 3px 0px;
+}
+
+.contextMenuBtn:hover {
+	background: blue;
+	color: white;
+}
+
+.hamBtn {
+	display: inline-block;
+	border: outset white;
+	border-width: 1px 1px 1px 0;
+	background-color: #222;
+	border-radius: 0 5px 5px 0;
+	height: 28px;
+	width: 28px;
+	padding: 8px;
+	position: absolute;
+	left: 0;
+	top: 50px;
+	z-index: 0.5;
+	cursor: pointer;
+}
+
+.hamDiv {
+	background-color: white;
+	margin-top: 17.5%;
+	height: 10%;
+	width: 100%;
+}
+
+.markerMenu {
+	background: white;
+	cursor: pointer;
+}
+
+.markerMenuBtn {
+	background: white;
+	color: black;
+	padding: 0px 10px 0px 10px;
+}
+
+.markerMenuBtn:hover {
+	background: #cccccc;
+}
+
+.hiddenMenu > .hamBtn {
+	display: inline-block;
+	top: 0;
+	left: 0;
+}
+
+.controlBtn {
+	cursor: pointer;
+	border: .1px solid blue;
+	padding: 5px;
+}
+
+.infoMenu {
+	position: fixed;
+	top: 10%;
+	left: 46%;
+	width: 33%;
+	max-height: 60%;
+	z-index: 2;
+	background: #eeeeee;
+	border-style: outset;
+	padding: 15px;
+	font-size: 17px;
+	overflow: auto;
+	display: none;
+}
+
+#help-menu {
+	text-align: center;
+	z-index: 3;
+}
+
+.infoMenu button {
+	color: red;
+	font-size: 20px;
+}
+
+.placeBtn {
+	background-image:
+		linear-gradient(
+			white, #aaaaaa
+		);
+	padding: 5px 10px 5px 10px;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+.placesLinksMenu {
+	background: white;
+	border-style: inset;
+	padding: 10px;
+	display: none;
+}
+
+.rightDownArrow {
+	float: right;
+	border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+	-webkit-margin-before: 0.3em;
+	transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.blueBtn {
+	background: blue;
+	color: white;
+}
+
+.whiteBtn {
+	background: white;
+	color: blue;
+}

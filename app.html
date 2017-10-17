@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Simple Map</title>
+		<meta name="viewport" content="initial-scale=1.0">
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="underscore-min.js"></script>
+		<script src="knockout-min.js"></script>
+	</head>
+
+	<body>
+		<section id="marker-list-view">
+			<div id="lv-search-area">
+				<input type="text" id="marker-list-search-box" placeholder="Filter Markers by Name..." data-bind="value: lvSearchText">
+			</div>
+			<h3 style="font-size: 25px;">Control which markers show up on the map:</h3>
+			<span class="lvShowHideButton" data-bind="click: function() { setMarkersVisibility(lvFilteredArray(),false,true); }">Hide&nbsp;These</span>
+			<span class="lvShowHideButton" data-bind="click: function() { setMarkersVisibility(lvFilteredArray(),true,true); }">Show&nbsp;These</span>
+			<br>
+			<span class="lvShowHideButton" data-bind="click: function() { setMarkersVisibility(markers,false); }">Hide&nbsp;All</span>
+			<span class="lvShowHideButton" data-bind="click: function() { setMarkersVisibility(markers,true); }">Show&nbsp;All</span>
+			<section id="lv-marker-section" style="border-top: 1px solid white;">
+				<h1 style="font-size: 35px;">Markers:</h1>
+				<div id="lv-list-area" data-bind="foreach: lvFilteredArray()">
+					<!-- ko if: $data.visible -->
+					<div class="lvMarkerBtn" data-bind="text: $data.name, click: function(data) { markerListClickResponse(data); }"></div>
+					<!-- /ko -->
+					<!-- ko ifnot: $data.visible -->
+					<div class=" lvDeadMarkerBtn" data-bind="text: $data.name + ' (Hidden)'"></div>
+					<!-- /ko -->
+				</div>
+			</section>
+			<p id="no-markers-p" data-bind="if: lvFilteredArray().length < 1" >The map has no markers. Right click the map to add one.</p>
+		</section>
+		<div id="map"></div>
+		<div class="infoMenu" id="help-menu">
+			<h1>Help Instructions</h1>
+			<p>Add markers by right clicking the map and clicking on "Add&nbsp;Marker".</p>
+			<p>Right click markers to rename them, remove them, or view information about their surroundings.</p>
+			<p>Left clicking a marker shows its latitude and longitude.</p>
+			<p>You can get easy access to all the map's markers through the menu on the left. You can filter 
+			the markers that appear there with the search box at the top. You can
+			hide or show the markers on the map by clicking on the buttons on the left.</p>
+			<p>The app stores your marker data in local storage and loads that data during initialization.</p>
+			<button onclick="hideHelpInfoMenu()">OK</button>
+		</div>
+		<div class="infoMenu" id="marker-info-menu"></div>
+	</body>
+	
+	<script type="text/template" id="rename-temp">
+		<div>Rename Marker:<br>
+			<input id="rename-marker-input" type="text"><br>
+			<div style="padding-top: 17px;">
+				<span class="controlBtn blueBtn" style="margin-right: 30px;" onclick="submitRenameMarker()">Submit</span>
+				<span class="controlBtn whiteBtn" onclick="cancelRenameMarker()">Cancel</span>
+			</div>
+		</div>
+	</script>
+	
+	<script type="text/template" id="hamburger-temp">
+		<div class="hamBtn" onclick="toggleLvDisplay()"><div class="hamDiv"></div><div class="hamDiv"></div><div class="hamDiv"></div></div>
+	</script>
+	
+	<script type="text/template" id="info-window">
+		<h1><%- name %></h1>
+		Latitude: <%= lat %><br>
+		Longitude: <%= lng %>
+		<p><strong>Right click this marker for more information.</strong></p>
+	</script>
+	
+	<script type="text/template" id="list-temp">
+		<div class="<%= attrSettings.outerClass %>" id="<%= attrSettings.id %>" style="<%= attrSettings.outerStyle %>">
+			<% _.each(items, function (item) { %>
+				<%= innerTemplate(item) %>
+			<% }); %>
+		</div>
+	</script>
+	
+	<script type="text/template" id="ctxt-btn-temp">
+		<div class="contextMenuBtn" onclick="removeCurrentMenu()">
+			<%= name %>
+		</div>
+	</script>
+	
+	<script type="text/template" id="marker-places-temp">
+		<div class="centerAlign">
+			<img src="https://maps.googleapis.com/maps/api/streetview?size=450x250&location=<%= lat %>, <%= lng %>&fov=120"/>
+		</div>
+		<h1>Places near this marker:</h1>
+		<% if (places.length > 0) { %>
+			<%= listTemp({items: places, innerTemplate: singlePlaceTemp, attrSettings: {}}) %>
+		<% } else { %>
+			No nearby places found
+		<% } %>
+	</script>
+	
+	<script type="text/template" id="single-place-temp">
+		<div class="placeBtn">
+			<span><%- name %></span><span class="rightDownArrow"></span>
+		</div>
+		<div class="placesLinksMenu"></div>
+	</script>
+	
+	<script src="app.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAORud9KiCaW39sGH80lAO-w-IiqDjPAKE&libraries=places&callback=initMap" async defer></script>
+</html>
