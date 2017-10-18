@@ -43,7 +43,7 @@ function getComputedObsOfMarkers(context, searchText) {
 	return ko.computed(function() {
 		var text = searchText();
 		return _.filter(this.markerNameObjs(), function(obj) {
-			return text == "" || (obj().name.toLowerCase().includes(text.toLowerCase()));
+			return text === "" || (obj().name.toLowerCase().includes(text.toLowerCase()));
 		}, this);
 	}, context);
 }
@@ -89,7 +89,7 @@ function removeMarker(marker) {
 	var index = markers.indexOf(marker);
 	markers.splice(index, 1);
 	storedMarkerData.splice(index, 1);
-	markerNameObjs.splice(index, 1)
+	markerNameObjs.splice(index, 1);
 	localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(storedMarkerData));
 }
 
@@ -329,7 +329,7 @@ function setMarkersVisibility(markerArray, visibilityVal, mustConvert=false) {
 		});
 	}
 	_.each(markerArray, function(marker) {
-		setMarkerVisibility(marker, visibilityVal)
+		setMarkerVisibility(marker, visibilityVal);
 	});
 }
 
@@ -467,7 +467,7 @@ function renderLinksFor(place, element) {
 		success: function(data) {
 			pageNames = data[1];
 			
-			if (pageNames.length == 0) {
+			if (pageNames.length === 0) {
 				htmlArray.push("No related Wikipedia links available");
 			} else {
 				for (var j = 0; j < pageNames.length; j++) {
