@@ -1,4 +1,3 @@
-"use strict";
 //******************************
 //INTERFACE
 //******************************
@@ -175,7 +174,7 @@ function initMap() {
 	//Hamburger Button for showing/hiding the list view (button appears on the map)
 	var hamDiv = document.createElement("DIV");
 	hamDiv.setAttribute("class", "hamBtn");
-	hamDiv.innerHTML = '<div class="hamDiv"></div><div class="hamDiv"></div><div class="hamDiv"></div>'
+	hamDiv.innerHTML = '<div class="hamDiv"></div><div class="hamDiv"></div><div class="hamDiv"></div>';
 	hamDiv.setAttribute("data-bind", "click: toggleLvDisplay");
 	map.controls[google.maps.ControlPosition.LEFT_TOP].push(hamDiv);
 	
@@ -337,7 +336,7 @@ function hideAllMenus() {
 		oneWasHidden = true;
 	});
 	resetInfoWindowData();
-	return oneWasHidden
+	return oneWasHidden;
 }
 
 //called whenever infoWindows are closed
@@ -378,7 +377,7 @@ var iwContentString =
 //from near the marker's location and wikipedia links for nearby places.
 function openInfoWindowForMarker(marker) {	
 	var location = marker.getPosition();
-	var streetViewURL = "https://maps.googleapis.com/maps/api/streetview?size=450x250&location=" + location.lat() + "," + location.lng() + "&fov=120"
+	var streetViewURL = "https://maps.googleapis.com/maps/api/streetview?size=450x250&location=" + location.lat() + "," + location.lng() + "&fov=120";
 	var request = {
 		location: location,
 		radius: PLACES_SEARCH_RADIUS
