@@ -20,7 +20,8 @@ body {
 
 #marker-list-view {
 	height: 100%;
-	padding: 10px 10px 0 10px;
+	padding: 40px;
+	min-width: 300px;
 	color: white;
 	background-color: #222;
 	overflow: auto;
@@ -194,7 +195,7 @@ body {
 	background: white;
 	border-style: inset;
 	padding: 10px;
-	display: none;
+	font-size: 15px;
 }
 
 .rightDownArrow {
